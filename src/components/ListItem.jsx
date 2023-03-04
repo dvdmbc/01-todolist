@@ -21,7 +21,7 @@ export function ListItem({ taskId, taskContent, taskIsDone, onDelete, onSelect }
                 {taskIsDone ? <Check size={24}></Check> : null}
             </button>
 
-            <p className={taskIsDone ? styles.listItemTextSelected : styles.listItemText}>{taskId} {taskContent}</p>
+            <p className={taskIsDone ? styles.listItemTextSelected : styles.listItemText}>{taskContent}</p>
 
             <button className={styles.listItemDeleteButton} onClick={handleDeleteTask} title="Deletar tarefa">
                 <Trash size={24}  ></Trash>

@@ -1,26 +1,27 @@
 import { ListContent } from './ListContent';
 import styles from './List.module.css'
+import { v4 as uuidv4 } from "uuid";
 import { PlusCircle } from 'phosphor-react';
 import { useState } from 'react';
 
 const tasksFixed = [
     {
-        id: 1,
+        id: uuidv4(),
         content: "Passear com os cachorros",
         isDone: false
     },
     {
-        id: 2,
+        id: uuidv4(),
         content: "Lavar a louça",
         isDone: false
     },
     {
-        id: 3,
+        id: uuidv4(),
         content: "Limpar a casa",
         isDone: true
     },
     {
-        id: 4,
+        id: uuidv4(),
         content: "Estudar React",
         isDone: true
     },
@@ -28,14 +29,24 @@ const tasksFixed = [
 
 export function List() {
     const [tasks, setTasks] = useState(tasksFixed)
+    const [newTaskInputText, setNewTaskInputText] = useState('')
 
     // Adicionar uma nova tarefa - handleCreateNewTask, handleNewTaskInputChange
     function handleCreateNewTask(event) {
         event.preventDefault();
+        const newTask = {
+            id: uuidv4(),
+            content: newTaskInputText,
+            isDone: false
+        };
+        const newTasksArray = [...tasks, newTask];
 
+        setTasks(newTasksArray)
+        setNewTaskInputText('');
     }
 
-    function handleNewTaskInputChange() {
+    function handleNewTaskInputChange(event) {
+        setNewTaskInputText(event.target.value)
 
     }
 
@@ -59,12 +70,17 @@ export function List() {
     return (
         <div className={styles.list}>
             <header className={styles.listHeader}>
-                <form className={styles.form}>
+                <form className={styles.form} onSubmit={handleCreateNewTask}>
                     <input
-                        id='newTaskInput'
                         placeholder='Adicione uma nova tarefa'
+                        type='text'
+                        value={newTaskInputText}
+                        required
+                        id='newTaskInput'
                         className={styles.listNewTaskInput}
-                        
+                        onChange={(event) => handleNewTaskInputChange(event)}
+
+
                     />
                     <button className={styles.listNewTaskButton}>
                         <span>Criar</span>
