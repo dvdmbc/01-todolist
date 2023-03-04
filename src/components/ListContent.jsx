@@ -1,15 +1,20 @@
 import styles from './ListContent.module.css';
 import { ListItem } from './ListItem';
 
-export function ListContent({ tasks, onDelete }) {
-
+export function ListContent({ tasks, onDelete, onSelect }) {
+    // Calcular o total de tarefas
     const createdTasksCount = tasks.length
+    // Mostrar o progresso de conclusão das tarefas - doneTasks
     const doneTasksCount = tasks.filter((task) => task.isDone === true).length;
-    // console.log(tasks.filter((task) => task.isDone === true))
-
+    
     function deleteTaskItem(taskIdFromListItem) {
-        onDelete(taskIdFromListItem)
-    }
+        onDelete(taskIdFromListItem);
+    };
+
+    function selectTaskItem(taskIdFromListItem) {
+        onSelect(taskIdFromListItem);
+    };
+
     return (
         <div className={styles.listContent}>
 
@@ -34,6 +39,7 @@ export function ListContent({ tasks, onDelete }) {
                             taskContent={content}
                             taskIsDone={isDone}
                             onDelete={deleteTaskItem}
+                            onSelect={selectTaskItem}
                         >
                         </ListItem>
                     )

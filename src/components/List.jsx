@@ -29,14 +29,26 @@ const tasksFixed = [
 export function List() {
     const [tasks, setTasks] = useState(tasksFixed)
 
-    // Adicionar uma nova tarefa - createNewTask, handleNewTaskChange
+    // Adicionar uma nova tarefa - handleCreateNewTask, handleNewTaskInputChange
+    function handleCreateNewTask(event) {
+        event.preventDefault();
 
-    // Mostrar o progresso de conclusão das tarefas - doneTasks, setDoneTasks
+    }
+
+    function handleNewTaskInputChange() {
+
+    }
+
 
     // Marcar e desmarcar uma tarefa como concluída - markTaskAsDone
-    
-    // function markTaskAsDone(taskId) {
-    // }
+
+    function markTaskAsDone(taskId) {
+        const tasksWithNewSelected = tasks.map((task) => {
+            if (task.id === taskId) task.isDone = !task.isDone;
+            return task;
+        });
+        setTasks(tasksWithNewSelected)
+    }
 
     // Remover uma tarefa da listagem - deleteTask
     function deleteTask(taskId) {
@@ -49,8 +61,10 @@ export function List() {
             <header className={styles.listHeader}>
                 <form className={styles.form}>
                     <input
+                        id='newTaskInput'
                         placeholder='Adicione uma nova tarefa'
                         className={styles.listNewTaskInput}
+                        
                     />
                     <button className={styles.listNewTaskButton}>
                         <span>Criar</span>
@@ -61,6 +75,8 @@ export function List() {
             <ListContent
                 tasks={tasks}
                 onDelete={deleteTask}
+                onSelect={markTaskAsDone}
+
             >
             </ListContent>
 
