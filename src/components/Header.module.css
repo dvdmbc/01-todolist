@@ -1,0 +1,33 @@
+.header {
+    background: var(--gray-700);
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header strong {
+    font-size: 2.5rem;
+    font-weight: 900;
+}
+
+
+.header .purple {
+    color: var(--primary);
+}
+
+.header .purple:hover {
+    color: var(--primary-dark);
+}
+
+.header .blue {
+    color: var(--secondary);
+}
+
+.header .blue:hover {
+    color: var(--secondary-dark);
+}
+
+.header img {
+    padding-right: 0.75rem;
+}
